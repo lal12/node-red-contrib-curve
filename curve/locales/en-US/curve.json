@@ -8,7 +8,8 @@
         },
         "placeholder": {
             "valuex": "payload",
-            "fexpression": "(x = current value)"
+            "fexpression": "(x = current value)",
+            "name": "Name"
         },
         "option": {
             "float": "Float",

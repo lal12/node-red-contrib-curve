@@ -74,13 +74,24 @@
     outputLabels: function () { return 'f(x) = ' + this.fexpression }, // string or function, NR v0.17+
     icon: "function.png", // stock icon, or use own in icons dir
     oneditprepare: function () {
-
       $("#node-input-valuex").typedInput({
         default: "string",
         types: [{
           value: "string",
           label: "msg"
         }]
+      });
+      $("#node-input-outputtype").typedInput({
+        types: [
+          {
+            value: "fruit",
+            options: [
+              { value: "float", label: "Float" },
+              { value: "ceil", label: "Ceil" },
+              { value: "floor", label: "Floor" },
+            ]
+          }
+        ]
       });
 
       var node = this;
@@ -98,6 +109,7 @@
       var timerid;
       var lastval;
       var inputChange = function (value) {
+        console.log('inputChange', value, lastval)
         if (lastval != value) {
 
           lastval = value;
@@ -116,9 +128,6 @@
           }, 500);
         };
       };
-
-      $('#node-input-outputtype').select(this.outputtype);
-
       this.editor = RED.editor.createEditor({
         id: 'node-input-fexpression-editor',
         mode: 'ace/mode/handlebars',
@@ -143,11 +152,17 @@
     },
     oneditsave: function () {
       $("#node-input-fexpression").val(this.editor.getValue());
+      this.editor.destroy();
       delete this.editor;
-
     },
-    oneditcancel: function () { delete this.editor; },
-    oneditdelete: function () { delete this.editor; },
+    oneditcancel: function () {
+      this.editor.destroy();
+      delete this.editor;
+    },
+    oneditdelete: function () {
+      this.editor.destroy();
+      delete this.editor;
+    },
     oneditresize: function (size) {
       fpoptions.width = 0.95 * size.width;
       fpoptions.height = 0.40 * size.height;
@@ -165,7 +180,7 @@
 <script type="text/x-red" data-template-name="curve">
   <div class="form-row">
     <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-    <input type="text" id="node-input-name">
+    <input type="text" id="node-input-name" data-i18n="[placeholder]curve.placeholder.name">
   </div>
 
   <div id="function-plot-graph" style="width:100%;">
@@ -173,11 +188,9 @@
   <div id="function-plot-graph-message" style="width:100%; color:red; ">
   </div>
 
-  <div class="form-row">
+  <div class="form-row node-text-editor-row">
     <label for="node-input-fexpression-editor"><i class="fa fa-industry"></i> <span data-i18n="curve.label.fexpression"></span></label>
-    <input type="hidden" id="node-input-fexpression" autofocus="autofocus">
-
-
+    <input type="hidden" id="node-input-fexpression">
   </div>
   <div class="form-row node-text-editor-row">
     <div style="height: 70px; min-height:50px;" class="node-text-editor" id="node-input-fexpression-editor"></div>
@@ -190,11 +203,7 @@
 
   <div class="form-row">
     <label for="node-input-outputtype"><i class="fa fa-compress"></i> <span data-i18n="curve.label.outputtype"></span></label>
-    <select id="node-input-outputtype" style="width:100%;">
-            <option value="float" data-i18n="curve.option.float"></option>
-            <option value="ceil"  data-i18n="curve.option.ceil"></option>
-            <option value="floor" data-i18n="curve.option.floor"></option>
-        </select>
+    <input type="text" id="node-input-outputtype" data-i18n="[placeholder]curve.placeholder.outputtype" />
   </div>
 
   <div class="form-row" style="width:100%;">
@@ -202,6 +211,4 @@
       <b>Tip:</b> <span data-i18n="curve.label.tip"></span>
     </div>
   </div>
-
-
 </script>

@@ -1,3 +1,7 @@
+#### 1.0.2
+
+- fixing hidden input form
+
 #### 1.0.1
 - using nodered library for function expressions
 - updated readme
