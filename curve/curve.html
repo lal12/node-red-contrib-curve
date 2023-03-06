@@ -20,15 +20,12 @@
 
     grid: true,
     disableZoom: false,
-    xAxis: {
-      label: 'x',
-      domain: [0, 1]
-    },
     yAxis: {
       label: 'y = f(x)',
-      domain: [0, 1]
     },
+    xAxis: {
 
+    },
     annotations: [{
       x: 1,
       text: 'x = 1'
@@ -38,14 +35,34 @@
     }]
   };
 
+  function computeXScale(width, height, yScale) {
+    const xDiff = yScale[1] - yScale[0]
+    const yDiff = width * xDiff / height
+    return [-yDiff / 2, yDiff / 2]
+  }
+
   function plot() {
     try {
-      functionPlot(fpoptions);
+      let zeroPassing = null;
+      try {
+        zeroPassing = evalExpr(fpoptions.data[0].fn, 0);
+      } catch (e) { }
+      const options = JSON.parse(JSON.stringify(fpoptions));
+      if (zeroPassing !== null) {
+        const yScale = zeroPassing !== null ? [Math.min(zeroPassing * 1.5, -1), Math.max(zeroPassing * 1.5, 1)] : undefined;
+        options.yAxis.domain = yScale;
+        options.xAxis.domain = computeXScale(fpoptions.width, fpoptions.height, yScale);
+      }
+      functionPlot(options);
       $('#function-plot-graph-message').text('');
     }
     catch (err) {
       $('#function-plot-graph-message').text(err.message);
     }
+  }
+
+  function evalExpr(rawExpr, x = 0) {
+    return functionPlot.eval.builtIn({ fn: rawExpr.replace(/{{.*}}/, '1') }, 'fn', { x })
   }
 
   RED.nodes.registerType('curve', {
@@ -54,8 +71,10 @@
       fexpression: {
         value: '', required: true, validate: function (f) {
           try {
-            functionPlot.eval.builtIn({ fn: f.replace(/{{.*}}/, '1') }, 'fn', { x: 0 })
-          } catch (e) { return false; }
+            evalExpr(f);
+          } catch (e) {
+            return false;
+          }
           return true;
         }
       },

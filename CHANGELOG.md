@@ -1,6 +1,6 @@
 #### 1.0.2
-
 - fixing hidden input form
+- automatically calculate zoom scale
 
 #### 1.0.1
 - using nodered library for function expressions
