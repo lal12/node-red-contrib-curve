@@ -162,7 +162,7 @@
 
       RED.library.create({
         url: "curve", // where to get the data from
-        type: "node-red-contrib-curve", // the type of object the library is for
+        type: "@lal12/node-red-curve", // the type of object the library is for
         editor: this.editor,
         mode: "ace/mode/handlebars",
         fields: ['name']
@@ -189,7 +189,7 @@
     },
 
     onpaletteadd: function () {
-      $.getScript('node-red-contrib-curve/function-plot.min.js')
+      $.getScript('@lal12/node-red-curve/function-plot.min.js')
     },
     onpaletteremove: function () { },
   });

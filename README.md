@@ -1,4 +1,6 @@
-# node-red-contrib-curve
+# node-red-curve
+
+A fork (with bugfixes and improvements) of https://github.com/sbarwe/node-red-contrib-curve.
 
 A function node for a mathematical expression f(x) for creating simulation data, characteristics, calibration data and other numerical output based on a numeric input.
 
@@ -10,7 +12,7 @@ A function node for a mathematical expression f(x) for creating simulation data,
 
 - Use the modulo-operator (%) to create infinite ranged functions like [easings](http://easings.net/).
  
-![curve in action](https://github.com/sbarwe/node-red-contrib-curve/blob/master/curve.gif?raw=true)
+![curve in action](https://github.com/lal12/node-red-contrib-curve/blob/master/curve.gif?raw=true)
 
 ## Examples: 
 
@@ -51,20 +53,11 @@ This node uses the work of Mauricio Poppe for visualization and function express
 
 See [Change Log](CHANGELOG.md) for details
 
-[![NPM](https://nodei.co/npm/node-red-contrib-curve.png)](https://nodei.co/npm/node-red-contrib-curve/)
-
-# Installation
-
-Follow the [node installation guide](https://nodered.org/docs/getting-started/adding-nodes) to the npm-package node-red-contrib-curve.
-```bash
-npm install node-red-contrib-curve
-```
-
+[![NPM](https://nodei.co/npm/@lal12/node-red-curve.png)](https://www.npmjs.com/package/@lal12/node-red-curve/)
 
 ## Discussions and suggestions
 
-Use the [Node-RED google group](https://groups.google.com/forum/#!forum/node-red) for general discussion about this node. Or use the
-[GitHub issues log](https://github.com/sbarwe/node-red-contrib-curve/issues) for raising issues or contributing suggestions and enhancements.
+Use the [GitHub issues log](https://github.com/lal12/node-red-contrib-curve/issues) for raising issues or contributing suggestions and enhancements.
 
 ## Contributing
 
@@ -72,6 +65,7 @@ If you would like to contribute to this node, you can contact the autor via GitH
 
 ## Developers/Contributors
 
+- newest version [lal12](https://github.com/lal12)
 - Based on [function-plot](http://maurizzzio.github.io/function-plot/) work of  [Mauricio Poppe](https://github.com/maurizzzio)
-- Node-RED node wrapper [Sebastian Barwe](https://github.com/sbarwe)
+- original Node-RED node wrapper [Sebastian Barwe](https://github.com/sbarwe)
 - Node template from [Julian Knight](https://github.com/TotallyInformation)

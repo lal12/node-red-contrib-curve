@@ -30,7 +30,7 @@ function NodeContext(msg, nodeContext, parent) {
 
 NodeContext.prototype = new mustache.Context()
 
-NodeContext.prototype.lookup = function(name) {
+NodeContext.prototype.lookup = function (name) {
   // try message first:
   try {
     var value = this.msgContext.lookup(name)
@@ -59,7 +59,7 @@ NodeContext.prototype.push = function push(view) {
   return new NodeContext(view, this.nodeContext, this.msgContext)
 }
 
-module.exports = function(RED) {
+module.exports = function (RED) {
   'use strict'
   function nodeCurve(config) {
     // get config
@@ -134,14 +134,14 @@ module.exports = function(RED) {
 
     node.on('input', nodeInputHandler)
 
-    node.on('close', function() {
+    node.on('close', function () {
       node.removeListener('input', nodeInputHandler)
     })
   } // ---- End of nodeCurve (initialised node instance) ---- //
 
   RED.nodes.registerType('curve', nodeCurve)
 
-  RED.httpAdmin.get('/node-red-contrib-curve/function-plot.min.js', function(
+  RED.httpAdmin.get('/@lal12/node-red-curve/function-plot.min.js', function (
     req,
     res
   ) {
